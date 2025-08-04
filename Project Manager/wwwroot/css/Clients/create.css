@@ -1,0 +1,11 @@
+﻿form .form-label {
+    font-weight: 500;
+}
+
+input:required:invalid {
+    border-color: #dc3545;
+}
+
+input:required:valid {
+    border-color: #198754;
+}

@@ -1,0 +1,52 @@
+﻿@page
+@model Project_Manager.Pages.Clients.CreateModel
+@{
+    ViewData["Title"] = "Add New Client";
+}
+
+<link rel="stylesheet" href="~/css/Clients/create.css" />
+
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Client</h2>
+
+    <form method="post" class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="NewClient.Fname" class="form-label">First Name</label>
+            <input asp-for="NewClient.Fname" class="form-control" required />
+            <span asp-validation-for="NewClient.Fname" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="NewClient.Lname" class="form-label">Last Name</label>
+            <input asp-for="NewClient.Lname" class="form-control" required />
+            <span asp-validation-for="NewClient.Lname" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="NewClient.Email" class="form-label">Email</label>
+            <input asp-for="NewClient.Email" type="email" class="form-control" required />
+            <span asp-validation-for="NewClient.Email" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="NewClient.PhoneNum" class="form-label">Phone Number</label>
+            <input asp-for="NewClient.PhoneNum" class="form-control" />
+            <span asp-validation-for="NewClient.PhoneNum" class="text-danger small"></span>
+        </div>
+
+        <div class="col-12">
+            <label asp-for="NewClient.Company" class="form-label">Company</label>
+            <input asp-for="NewClient.Company" class="form-control" />
+            <span asp-validation-for="NewClient.Company" class="text-danger small"></span>
+        </div>
+
+        <div class="col-12 d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">Add Client</button>
+            <a asp-page="/Clients/Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

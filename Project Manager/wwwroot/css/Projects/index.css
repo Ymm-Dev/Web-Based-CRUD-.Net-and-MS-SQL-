@@ -1,0 +1,13 @@
+﻿.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.4em 0.6em;
+}
+
+h1.display-6 {
+    font-weight: 600;
+}

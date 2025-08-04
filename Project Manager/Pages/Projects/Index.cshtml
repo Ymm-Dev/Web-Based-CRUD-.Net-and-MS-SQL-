@@ -1,0 +1,92 @@
+﻿@page
+@model Project_Manager.Pages.Projects.IndexModel
+@{
+    ViewData["Title"] = "Project List";
+}
+
+<link rel="stylesheet" href="~/css/Projects/index.css" />
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="display-6">Project List</h1>
+        <a asp-page="/Projects/Create" class="btn btn-success">+ Add New Project</a>
+    </div>
+
+    <form method="get" class="row g-2 mb-4 align-items-center">
+        <div class="col-md-4">
+            <input type="text" name="SearchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search projects..." />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+    {
+        <div class="alert alert-info">
+            Showing results for: <strong>@Model.SearchTerm</strong>
+        </div>
+    }
+
+    @if (!Model.ProjectList.Any())
+    {
+        <div class="alert alert-warning">No projects found.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Client</th>
+                        <th>Start Date</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var project in Model.ProjectList)
+                    {
+                        <tr>
+                            <td>@project.Title</td>
+                            <td>@project.Description</td>
+                            <td>@project.ClientName</td>
+                            <td>@(project.StartDate?.ToString("yyyy-MM-dd"))</td>
+                            <td>@(project.Deadline?.ToString("yyyy-MM-dd"))</td>
+                            <td>
+                                @switch (project.Status?.ToLower())
+                                {
+                                    case "pending":
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                        break;
+                                    case "started":
+                                        <span class="badge bg-primary">Started</span>
+                                        break;
+                                    case "on hold":
+                                        <span class="badge bg-info text-dark">On Hold</span>
+                                        break;
+                                    case "finished":
+                                        <span class="badge bg-success">Finished</span>
+                                        break;
+                                    case "cancelled":
+                                        <span class="badge bg-danger">Cancelled</span>
+                                        break;
+                                    default:
+                                        <span class="badge bg-secondary">N/A</span>
+                                        break;
+                                }
+                            </td>
+                            <td class="text-center">
+                                <a asp-page="/Projects/Edit" asp-route-id="@project.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                                <a asp-page="/Projects/Delete" asp-route-id="@project.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

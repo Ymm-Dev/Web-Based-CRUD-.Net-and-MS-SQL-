@@ -1,0 +1,14 @@
+﻿input:required:invalid,
+select:required:invalid {
+    border-color: #dc3545;
+}
+
+input:required:valid,
+select:required:valid,
+#status{
+    border-color: #198754;
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
